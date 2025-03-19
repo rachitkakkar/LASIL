@@ -1,0 +1,8 @@
+# Version 5: While statement and top-level statement test
+def bar(x) {
+  while (x < 1) {
+    1 + 5 * 3
+  }
+}
+
+bar(1)

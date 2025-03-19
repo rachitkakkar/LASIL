@@ -1,0 +1,5 @@
+# Version 2-3: Parser support for function declarations of one statement/expression
+# Test with function definition, function call, and binary operations with precedence
+def test(x, y) { 
+  (1+2+x)*(test(x, 2)+(1+2))
+}

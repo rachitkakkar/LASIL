@@ -1,0 +1,11 @@
+# Version 5: If statement and top-level statement test
+def foo(x) {
+  if (x<1) { 
+    1
+  }
+  else {
+    foo(x-1)
+  }
+}
+
+foo(100)

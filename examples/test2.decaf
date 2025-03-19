@@ -1,0 +1,6 @@
+# Version 3-4: Optimization and top-level statement test
+def foo(x) {
+  (1+2+x)*(x+(1+2))
+}
+
+foo(1)

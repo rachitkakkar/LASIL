@@ -1,0 +1,17 @@
+# Version 5: If statement, while statement, and top-level statement test
+def bar(x) {
+  while (x < 1) {
+    1 + 5 * bar(1)
+  }
+}
+
+def foo(x) {
+  if (x<1) { 
+    foo(1)
+  }
+  else {
+    bar(x)
+  }
+}
+
+foo(1)
