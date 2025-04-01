@@ -1,6 +1,10 @@
 # Directories
 build/
 Deliverables/
+.vscode/
+
+# Macos
+.DS_Store
 
 # Prerequisites
 *.d
