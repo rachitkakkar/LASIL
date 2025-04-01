@@ -1,0 +1,14 @@
+# Compute the x'th fibonacci number iteratively.
+def fib(x) {
+  var a = 1, b = 1, c = 0, i = 3 in (
+    while (i < x) {
+      c = a + b :
+      a = b :
+      b = c :
+      i = i + 1
+    }
+  ) : b;
+}
+
+# This expression will compute the 40th number.
+fib(40)
