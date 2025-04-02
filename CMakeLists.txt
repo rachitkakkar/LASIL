@@ -55,6 +55,14 @@ include_directories(${LLVM_INCLUDE_DIRS})
 # Add LLVM definitions (e.g. defines like NDEBUG)
 add_definitions(${LLVM_DEFINITIONS})
 
+Include(FetchContent)
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.4.0 # or a later release
+)
+FetchContent_MakeAvailable(Catch2)
+
 # Add an executable with the above sources
 add_executable(decaf_cc ${SOURCES})
 
@@ -63,7 +71,8 @@ add_executable(decaf_cc ${SOURCES})
 #                 OUTPUT_VARIABLE llvm_libraries)
 
 # Link the executable to LLVM libraries
-target_link_libraries(decaf_cc     
+target_link_libraries(decaf_cc
+    PRIVATE
     LLVMWindowsManifest
     LLVMXRay
     LLVMLibDriver
@@ -241,7 +250,13 @@ target_link_libraries(decaf_cc
     LLVMTableGen
     LLVMSupport
     LLVMDemangle
+    Catch2::Catch2WithMain
 )
+
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
+include(CTest)
+include(Catch)
+catch_discover_tests(decaf_cc)
 
 # Set the directories that should be included in the build command for this target
 # when running g++ these will be included as -I/directory/path/
