@@ -15,7 +15,7 @@ public:
 };
 
 void handleFuncDefinition(DecafParsing::Parser* parser);
-void handleTopLevelStatement(DecafParsing::Parser* parser);
+double handleTopLevelStatement(DecafParsing::Parser* parser);
 
 }
 

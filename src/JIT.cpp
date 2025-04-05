@@ -30,7 +30,7 @@ void DecafJIT::handleFuncDefinition(DecafParsing::Parser* parser) {
   }
 }
 
-void DecafJIT::handleTopLevelStatement(DecafParsing::Parser* parser) {
+double DecafJIT::handleTopLevelStatement(DecafParsing::Parser* parser) {
   DecafLogger::Logger::displayToken(parser->peek().value());
   if (auto fnAST = parser->parseTopLevelExpr()) {
     if (fnAST->codegen()) {
@@ -44,12 +44,15 @@ void DecafJIT::handleTopLevelStatement(DecafParsing::Parser* parser) {
       // arguments, returns a double) so we can call it as a native function.
       // double (*FP)() = exprSymbol.getAddress().toPtr<double (*)()>();
       double (*FP)() = (double (*)())(intptr_t)exprSymbol.getAddress();
-      fprintf(stderr, "Evaluated to \e[1;37;41m%f\e[m\n\n", FP());
+      double result = FP();
+      // fprintf(stderr, "Evaluated to \e[1;37;41m%f\e[m\n\n", FP());
       // Delete the anonymous expression module from the JIT.
       DecafJIT::JIT::exitOnError(RT->remove());
+      return result;
     }
   } else {
     // Skip token for error recovery
     parser->consume();
+    return -1.0;
   }
 }
